@@ -564,27 +564,37 @@
         </div>
     </div>
 
-    <script>
+    <!-- Firebase SDK -->
+    <script type="module">
+        // ========================================
+        // FIREBASE CONFIGURATION
+        // ========================================
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAvY2XO7WQClOkmQN20fc6ABOMd1l5_C9Q",
+            authDomain: "debtsuccessportal.firebaseapp.com",
+            projectId: "debtsuccessportal",
+            storageBucket: "debtsuccessportal.firebasestorage.app",
+            messagingSenderId: "663430205997",
+            appId: "1:663430205997:web:975291f3f432aa5ec11ea4"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
         // ========================================
         // CONFIGURATION - WEBHOOK URLS
         // ========================================
-        const ZAPIER_WEBHOOK_LOGIN = 'https://hooks.zapier.com/hooks/catch/18655142/ule7sa1/';
+        const ZAPIER_WEBHOOK_VALIDATE_USER = 'https://hooks.zapier.com/hooks/catch/18655142/ule7sa1/';
         const ZAPIER_WEBHOOK_FEEDBACK = 'https://hooks.zapier.com/hooks/catch/18655142/ulcd4ye/';
 
         let currentClient = null;
 
         // ========================================
-        // TEMPORARY: Hardcoded test data (bypassing login for now)
-        // ========================================
-        const TEST_MODE = true; // Set to false when login webhook is working
-        const TEST_CLIENT_DATA = {
-            idNumber: "8605025095082",
-            email: "stiaan@saltandlightcreations.co.za",
-            name: "Stiaan van Zyl"
-        };
-
-        // ========================================
-        // LOGIN
+        // CUSTOM AUTHENTICATION AGAINST ZAPIER TABLES
         // ========================================
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -597,46 +607,72 @@
             const loginAlertText = document.getElementById('loginAlertText');
 
             loginBtn.disabled = true;
-            loginBtnText.textContent = 'Signing in...';
+            loginBtnText.textContent = 'Verifying credentials...';
             loginAlert.classList.add('hidden');
 
-            // TEMPORARY: Use test mode to bypass login webhook
-            if (TEST_MODE) {
-                // Check if credentials match test data
-                if (idNumber === TEST_CLIENT_DATA.idNumber && email === TEST_CLIENT_DATA.email) {
-                    currentClient = TEST_CLIENT_DATA;
-                    setTimeout(() => {
-                        showFeedbackForm();
-                    }, 500); // Simulate API delay
-                } else {
-                    loginAlertText.textContent = 'Invalid ID number or email address. For testing, use: ID: 8605025095082, Email: stiaan@saltandlightcreations.co.za';
-                    loginAlert.classList.remove('hidden');
-                    loginBtn.disabled = false;
-                    loginBtnText.textContent = 'Sign In';
-                }
-                return;
-            }
-
-            // REAL LOGIN (when webhook works)
             try {
-                const response = await fetch(ZAPIER_WEBHOOK_LOGIN, {
+                // Step 1: Validate against Zapier Tables database
+                const formData = new FormData();
+                formData.append('idNumber', idNumber);
+                formData.append('email', email);
+
+                const validationResponse = await fetch(ZAPIER_WEBHOOK_VALIDATE_USER, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ idNumber, email })
+                    body: formData
                 });
 
-                const data = await response.json();
+                // Wait a moment for Zapier to process
+                await new Promise(resolve => setTimeout(resolve, 1500));
 
-                if (data.success && data.client) {
-                    currentClient = data.client;
+                // Step 2: Create a temporary password for Firebase (ID Number)
+                // This allows us to use Firebase's session management
+                const firebasePassword = idNumber; // Using ID as password
+
+                loginBtnText.textContent = 'Signing in...';
+
+                try {
+                    // Try to sign in with Firebase
+                    const userCredential = await signInWithEmailAndPassword(auth, email, firebasePassword);
+
+                    // Success! Firebase session created
+                    console.log('Firebase authentication successful');
+
+                    // Store client data
+                    currentClient = {
+                        idNumber: idNumber,
+                        email: email,
+                        name: userCredential.user.displayName || 'User' // We'll set this up later
+                    };
+
                     showFeedbackForm();
-                } else {
-                    loginAlertText.textContent = data.error || 'Invalid ID number or email address. Please check your details and try again.';
-                    loginAlert.classList.remove('hidden');
+
+                } catch (firebaseError) {
+                    // User doesn't exist in Firebase yet, but they're in Zapier Tables
+                    // This means it's their first login - we'll handle this differently
+
+                    if (firebaseError.code === 'auth/user-not-found' || firebaseError.code === 'auth/wrong-password') {
+                        // For now, show them they need to be registered
+                        // In the next step, we'll automatically create their Firebase account
+                        loginAlertText.textContent = 'Account verification in progress. Please contact support to activate your account.';
+                        loginAlert.classList.remove('hidden');
+
+                        console.log('User exists in Zapier Tables but not in Firebase. Manual registration needed.');
+                    } else {
+                        throw firebaseError;
+                    }
                 }
+
             } catch (error) {
                 console.error('Login error:', error);
-                loginAlertText.textContent = 'Unable to connect. Please check your internet connection and try again.';
+
+                if (error.code === 'auth/invalid-email') {
+                    loginAlertText.textContent = 'Please enter a valid email address.';
+                } else if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    loginAlertText.textContent = 'Invalid ID number or email address. Please check your details and try again.';
+                } else {
+                    loginAlertText.textContent = 'Unable to connect. Please check your internet connection and try again.';
+                }
+
                 loginAlert.classList.remove('hidden');
             } finally {
                 loginBtn.disabled = false;
@@ -732,6 +768,23 @@
             document.getElementById('feedbackScreen').classList.add('hidden');
             document.getElementById('successScreen').classList.remove('hidden');
         }
+
+        // ========================================
+        // CHECK AUTH STATE ON PAGE LOAD
+        // ========================================
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log('User is signed in:', user.email);
+                // User is already logged in, could auto-show feedback form
+                // For now, we'll keep them on login screen until they manually login
+            } else {
+                console.log('No user signed in');
+            }
+        });
+
+        // Make functions available globally
+        window.showFeedbackForm = showFeedbackForm;
+        window.showSuccess = showSuccess;
     </script>
 </body>
 </html>
