@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Debt Success</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            color: #1a202c;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin: 0 auto 12px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .content {
+            background: white;
+            border-radius: 16px;
+            padding: 48px 60px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 12px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid #32b8b1;
+        }
+
+        .last-updated {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            padding-left: 16px;
+            border-left: 4px solid #32b8b1;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #4a5568;
+            font-size: 15px;
+        }
+
+        ul, ol {
+            margin-bottom: 16px;
+            padding-left: 32px;
+            color: #4a5568;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .highlight-box {
+            background: #f0fdfa;
+            border-left: 4px solid #32b8b1;
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box strong {
+            color: #32b8b1;
+            font-weight: 600;
+        }
+
+        .contact-box {
+            background: #f7fafc;
+            padding: 24px 28px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            margin-top: 32px;
+        }
+
+        .contact-box h3 {
+            margin-top: 0;
+            color: #2d3748;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            color: #4a5568;
+        }
+
+        .contact-item strong {
+            color: #2d3748;
+            min-width: 80px;
+        }
+
+        a {
+            color: #32b8b1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #32b8b1;
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(50, 184, 177, 0.3);
+            margin-bottom: 24px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(50, 184, 177, 0.4);
+            text-decoration: none;
+        }
+
+        .section-number {
+            display: inline-block;
+            background: #32b8b1;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 32px 24px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            body {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <img src="debt-success-logo.png" alt="Debt Success Logo">
+            </div>
+            <div class="company-name">Debt Success</div>
+            <div class="tagline">Turning money problems into solutions</div>
+        </div>
+
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">
+            <span>←</span>
+            <span>Back to Portal</span>
+        </a>
+
+        <!-- Privacy Policy Content -->
+        <div class="content">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last Updated: February 4, 2026</p>
+
+            <div class="highlight-box">
+                <strong>Your privacy matters to us.</strong> This Privacy Policy explains how Debt Success collects, uses, protects, and shares your personal information in accordance with the Protection of Personal Information Act, 2013 (POPIA).
+            </div>
+
+            <h2><span class="section-number">1</span> Introduction</h2>
+            <p>
+                Debt Success ("we", "our", "us") is committed to protecting your personal information and respecting your privacy.
+                As a registered debt counseling service in South Africa, we comply with all applicable laws, including POPIA.
+            </p>
+            <p>
+                This Privacy Policy applies to all personal information we collect through our Client Portal and other services.
+            </p>
+
+            <h2><span class="section-number">2</span> Information We Collect</h2>
+            <p>We collect the following types of personal information:</p>
+
+            <h3>Personal Identification Information</h3>
+            <ul>
+                <li>Full name and surname</li>
+                <li>South African ID number</li>
+                <li>Email address</li>
+                <li>Phone number (landline and/or mobile)</li>
+                <li>Physical and postal address</li>
+            </ul>
+
+            <h3>Financial Information</h3>
+            <ul>
+                <li>Debt counseling status</li>
+                <li>Financial Wellness Programme (FWP) progress and current step</li>
+                <li>Payment information (when you upgrade to paid services)</li>
+                <li>Financial documents you submit through our portal</li>
+            </ul>
+
+            <h3>Communication Data</h3>
+            <ul>
+                <li>Feedback forms and questionnaires</li>
+                <li>Questions and support requests</li>
+                <li>Email correspondence</li>
+                <li>Programme responses and insights</li>
+            </ul>
+
+            <h3>Technical Information</h3>
+            <ul>
+                <li>Login timestamps</li>
+                <li>Session information (for security purposes)</li>
+                <li>Browser type and device information (automatically collected)</li>
+            </ul>
+
+            <h2><span class="section-number">3</span> How We Use Your Information</h2>
+            <p>We process your personal information for the following purposes:</p>
+            <ul>
+                <li><strong>Service Delivery:</strong> To provide debt counseling services and administer the Financial Wellness Programme</li>
+                <li><strong>Progress Tracking:</strong> To monitor your progress through the FWP steps and provide personalized support</li>
+                <li><strong>Communication:</strong> To send you programme materials, updates, and respond to your questions</li>
+                <li><strong>Support:</strong> To contact you when you request assistance or check-ins</li>
+                <li><strong>Improvement:</strong> To analyze feedback and improve our services</li>
+                <li><strong>Legal Compliance:</strong> To comply with South African financial services regulations</li>
+                <li><strong>Payment Processing:</strong> To process payments for upgraded services (via Paystack)</li>
+            </ul>
+
+            <h2><span class="section-number">4</span> International Data Transfer</h2>
+            <div class="highlight-box">
+                <strong>Important Notice:</strong> Your personal information may be processed and stored on servers located outside of South Africa, including in the United States.
+            </div>
+
+            <p>We use the following international service providers:</p>
+            <ul>
+                <li><strong>Firebase (Google LLC):</strong> United States - for authentication, security, and session management</li>
+                <li><strong>Zapier Inc.:</strong> United States - for data management, workflow automation, and secure data storage</li>
+                <li><strong>Paystack:</strong> For payment processing (when you purchase upgraded services)</li>
+            </ul>
+
+            <h3>Safeguards for International Transfers</h3>
+            <p>We ensure appropriate safeguards are in place through:</p>
+            <ul>
+                <li>Encryption of all data in transit (HTTPS/TLS)</li>
+                <li>Encryption of data at rest on servers</li>
+                <li>Access controls and multi-factor authentication</li>
+                <li>Regular security audits and monitoring</li>
+                <li>Compliance with international data protection standards (ISO 27001, SOC 2)</li>
+                <li>Contractual agreements requiring service providers to protect your data</li>
+            </ul>
+
+            <p>
+                <strong>Your Consent:</strong> By using our Client Portal and checking the POPIA consent checkbox during login,
+                you explicitly consent to the international transfer of your personal information as described above.
+            </p>
+
+            <h2><span class="section-number">5</span> Data Security</h2>
+            <p>We implement industry-standard security measures to protect your personal information:</p>
+            <ul>
+                <li><strong>Encryption:</strong> All data transmitted between your browser and our servers is encrypted using HTTPS/TLS</li>
+                <li><strong>Authentication:</strong> Enterprise-grade Firebase Authentication with secure session management</li>
+                <li><strong>Access Controls:</strong> API key restrictions ensure only authorized applications can access data</li>
+                <li><strong>Monitoring:</strong> Continuous security monitoring and logging of access attempts</li>
+                <li><strong>Password Security:</strong> Passwords are hashed and never stored in plain text</li>
+                <li><strong>Regular Updates:</strong> Security patches and updates are applied promptly</li>
+            </ul>
+
+            <p>
+                While we take all reasonable steps to protect your information, no method of transmission over the internet
+                or electronic storage is 100% secure. We cannot guarantee absolute security but are committed to maintaining
+                the highest standards.
+            </p>
+
+            <h2><span class="section-number">6</span> Your Rights Under POPIA</h2>
+            <p>You have the following rights regarding your personal information:</p>
+
+            <h3>Right to Access</h3>
+            <p>You have the right to request access to the personal information we hold about you. We will provide you with a copy of your data within 30 days of your request.</p>
+
+            <h3>Right to Correction</h3>
+            <p>You have the right to request correction of any inaccurate or incomplete personal information. You can update most of your information directly through the Client Portal.</p>
+
+            <h3>Right to Deletion</h3>
+            <p>You have the right to request deletion of your personal information, subject to:</p>
+            <ul>
+                <li>Legal requirements to retain financial services records</li>
+                <li>Ongoing contractual obligations</li>
+                <li>Legitimate business interests</li>
+            </ul>
+
+            <h3>Right to Object</h3>
+            <p>You have the right to object to the processing of your personal information for certain purposes, such as marketing communications.</p>
+
+            <h3>Right to Restrict Processing</h3>
+            <p>You have the right to request that we restrict processing of your personal information in certain circumstances.</p>
+
+            <h3>Right to Withdraw Consent</h3>
+            <p>You have the right to withdraw your consent to data processing at any time. However, this may affect our ability to provide services to you.</p>
+
+            <h3>Right to Lodge a Complaint</h3>
+            <p>If you believe your privacy rights have been violated, you have the right to lodge a complaint with the Information Regulator.</p>
+
+            <div class="highlight-box">
+                <strong>To exercise any of these rights,</strong> please contact our Data Protection Officer using the contact information at the end of this policy.
+            </div>
+
+            <h2><span class="section-number">7</span> Data Retention</h2>
+            <p>We retain your personal information for the following periods:</p>
+            <ul>
+                <li><strong>Active Clients:</strong> For the duration of your participation in the Financial Wellness Programme, plus 5 years after completion</li>
+                <li><strong>Inactive Clients:</strong> As required by South African financial services regulations (typically 5-7 years)</li>
+                <li><strong>Communication Records:</strong> Email correspondence and feedback forms are retained for 5 years</li>
+                <li><strong>Financial Records:</strong> Payment records are retained for 7 years as required by law</li>
+            </ul>
+
+            <p>After the retention period expires, we securely delete or anonymize your personal information.</p>
+
+            <h2><span class="section-number">8</span> Sharing Your Information</h2>
+            <p>We do not sell, rent, or trade your personal information. We may share your information with:</p>
+
+            <h3>Service Providers</h3>
+            <ul>
+                <li>Technology providers (Firebase, Zapier, Paystack) who help us deliver our services</li>
+                <li>Email service providers for sending programme communications</li>
+            </ul>
+
+            <h3>Legal Requirements</h3>
+            <ul>
+                <li>When required by law or court order</li>
+                <li>To comply with financial services regulations</li>
+                <li>To protect our rights, property, or safety, or that of others</li>
+            </ul>
+
+            <h3>Business Transfers</h3>
+            <p>In the event of a merger, acquisition, or sale of assets, your personal information may be transferred to the new owner, subject to the same privacy protections.</p>
+
+            <h2><span class="section-number">9</span> Cookies and Tracking</h2>
+            <p>Our Client Portal uses minimal tracking technology:</p>
+
+            <h3>Essential Cookies</h3>
+            <ul>
+                <li><strong>Authentication Cookies:</strong> Firebase session cookies to keep you logged in (essential for functionality)</li>
+                <li><strong>Security Cookies:</strong> To prevent unauthorized access and protect against fraud</li>
+            </ul>
+
+            <h3>What We Don't Use</h3>
+            <ul>
+                <li>❌ Third-party advertising cookies</li>
+                <li>❌ Analytics tracking (we respect your privacy)</li>
+                <li>❌ Social media tracking pixels</li>
+                <li>❌ Cross-site tracking</li>
+            </ul>
+
+            <p>You can control cookies through your browser settings, but disabling essential cookies may prevent you from using the portal.</p>
+
+            <h2><span class="section-number">10</span> Children's Privacy</h2>
+            <p>
+                Our services are not directed to individuals under the age of 18. We do not knowingly collect personal
+                information from children. If we become aware that we have collected personal information from a child
+                without parental consent, we will take steps to delete that information.
+            </p>
+
+            <h2><span class="section-number">11</span> Changes to This Privacy Policy</h2>
+            <p>
+                We may update this Privacy Policy from time to time to reflect changes in our practices, technology,
+                legal requirements, or other factors.
+            </p>
+            <p>When we make material changes, we will:</p>
+            <ul>
+                <li>Update the "Last Updated" date at the top of this policy</li>
+                <li>Notify you via email (to the address on file)</li>
+                <li>Display a prominent notice in the Client Portal</li>
+                <li>Request your renewed consent where required by law</li>
+            </ul>
+            <p>We encourage you to review this Privacy Policy periodically.</p>
+
+            <h2><span class="section-number">12</span> Contact Information</h2>
+            <div class="contact-box">
+                <h3>Data Protection Officer</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>Email:</strong>
+                        <a href="mailto:admin@debtsuccess.co.za">admin@debtsuccess.co.za</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Phone:</strong>
+                        <span>+27 82 372 2425</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Address:</strong>
+                        <span>363 Eloff Street, Eloffsdal, Pretoria</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-box" style="margin-top: 24px;">
+                <h3>Information Regulator South Africa</h3>
+                <p>If you have concerns about how we handle your personal information, you may contact:</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>Website:</strong>
+                        <a href="https://www.justice.gov.za/inforeg/" target="_blank">justice.gov.za/inforeg</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email:</strong>
+                        <a href="mailto:inforeg@justice.gov.za">inforeg@justice.gov.za</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Phone:</strong>
+                        <span>+27 (0)10 023 5200</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 32px;">
+                <p style="margin: 0;">
+                    <strong>Thank you for trusting Debt Success with your personal information.</strong>
+                    We are committed to protecting your privacy and helping you achieve financial wellness.
+                </p>
+            </div>
+        </div>
+
+        <!-- Back Button (Bottom) -->
+        <a href="index.html" class="back-button">
+            <span>←</span>
+            <span>Back to Portal</span>
+        </a>
+    </div>
+</body>
+</html>
