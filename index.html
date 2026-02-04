@@ -628,22 +628,9 @@
             loginAlert.classList.add('hidden');
 
             try {
-                // Step 1: Validate against Zapier Tables database
-                const formData = new FormData();
-                formData.append('idNumber', idNumber);
-                formData.append('email', email);
-
-                const validationResponse = await fetch(ZAPIER_WEBHOOK_VALIDATE_USER, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                // Wait a moment for Zapier to process
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
-                // Step 2: Create a temporary password for Firebase (ID Number)
-                // This allows us to use Firebase's session management
-                const firebasePassword = idNumber; // Using ID as password
+                // Step 1: Try to sign in with Firebase directly
+                // We use ID number as the password
+                const firebasePassword = idNumber;
 
                 loginBtnText.textContent = 'Signing in...';
 
