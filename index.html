@@ -680,11 +680,15 @@
             };
 
             try {
+                // Use FormData to avoid CORS preflight
+                const formData = new FormData();
+                for (const key in feedbackData) {
+                    formData.append(key, feedbackData[key]);
+                }
+
                 const response = await fetch(ZAPIER_WEBHOOK_FEEDBACK, {
                     method: 'POST',
-                    mode: 'no-cors', // Bypass CORS restrictions
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(feedbackData)
+                    body: formData
                 });
 
                 // With no-cors mode, we can't read the response
