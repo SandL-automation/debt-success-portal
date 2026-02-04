@@ -37,17 +37,15 @@
         }
 
         .logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 24px;
+            width: 120px;
+            height: auto;
             margin: 0 auto 12px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .company-name {
@@ -126,8 +124,8 @@
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #32b8b1;
+            box-shadow: 0 0 0 3px rgba(50, 184, 177, 0.1);
         }
 
         input:read-only {
@@ -196,14 +194,15 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #32b8b1;
             color: white;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 12px rgba(50, 184, 177, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 16px rgba(50, 184, 177, 0.4);
+            background: #2da59f;
         }
 
         .btn-primary:active {
@@ -261,7 +260,7 @@
             background: #f7fafc;
             padding: 24px 28px;
             border-radius: 12px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #32b8b1;
             margin-bottom: 40px;
             font-size: 15px;
             line-height: 1.8;
@@ -326,7 +325,9 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="logo">DS</div>
+            <div class="logo">
+                <img src="debt-success-logo.png" alt="Debt Success Logo">
+            </div>
             <div class="company-name">Debt Success</div>
             <div class="tagline">Turning money problems into solutions</div>
         </div>
