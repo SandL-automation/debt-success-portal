@@ -682,19 +682,14 @@
             try {
                 const response = await fetch(ZAPIER_WEBHOOK_FEEDBACK, {
                     method: 'POST',
+                    mode: 'no-cors', // Bypass CORS restrictions
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(feedbackData)
                 });
 
-                const data = await response.json();
-
-                if (data.success) {
-                    showSuccess();
-                } else {
-                    feedbackAlertText.textContent = data.error || 'Unable to submit feedback. Please try again.';
-                    feedbackAlert.className = 'alert alert-error';
-                    feedbackAlert.classList.remove('hidden');
-                }
+                // With no-cors mode, we can't read the response
+                // Just assume success if no error was thrown
+                showSuccess();
             } catch (error) {
                 console.error('Feedback submission error:', error);
                 feedbackAlertText.textContent = 'Unable to connect. Please check your internet connection.';
