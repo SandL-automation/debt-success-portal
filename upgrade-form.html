@@ -584,7 +584,7 @@
 
                 <!-- Field 11: Payment Understanding -->
                 <div class="highlight-box">
-                    <p><strong>Important:</strong> The paid version of the FWP costs R450 per month. This subscription provides you with structured weekly guidance, personalized support, and direct access to our financial wellness experts.</p>
+                    <p><strong>Important:</strong> The paid version of the Financial Wellness Programme costs R450 per month. This subscription provides you with structured weekly guidance, personalized support, and direct access to our financial wellness experts.</p>
                 </div>
 
                 <div class="form-group">
@@ -643,22 +643,6 @@
                         Anything else you'd like us to know before we begin supporting you weekly?
                     </label>
                     <textarea class="form-textarea" id="additionalInfo" name="additionalInfo" placeholder="Optional"></textarea>
-                </div>
-
-                <!-- Field 14: How did you hear about us? -->
-                <div class="form-group">
-                    <label class="form-label">
-                        How did you hear about the paid version of the FWP?
-                    </label>
-                    <select class="form-select" id="referralSource" name="referralSource">
-                        <option value="">Select an option...</option>
-                        <option value="Email from Debt Success">Email from Debt Success</option>
-                        <option value="Dashboard notification">Dashboard notification in the portal</option>
-                        <option value="Phone call from team">Phone call from the Debt Success team</option>
-                        <option value="WhatsApp message">WhatsApp message</option>
-                        <option value="Friend or family">Friend or family member</option>
-                        <option value="Other">Other</option>
-                    </select>
                 </div>
 
                 <!-- Info Box -->
@@ -765,7 +749,6 @@
                 formData.append('billingMethod', document.querySelector('input[name="billingMethod"]:checked').value);
                 formData.append('contactBeforeStart', document.querySelector('input[name="contactBeforeStart"]:checked').value);
                 formData.append('additionalInfo', document.getElementById('additionalInfo').value);
-                formData.append('referralSource', document.getElementById('referralSource').value);
                 formData.append('timestamp', new Date().toISOString());
 
                 // Submit to Zapier webhook
