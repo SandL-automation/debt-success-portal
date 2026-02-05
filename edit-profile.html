@@ -411,6 +411,7 @@
         // Import Firebase modules
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 
         // Firebase configuration
         const firebaseConfig = {
@@ -425,36 +426,41 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
         // Zapier webhook URL for profile updates
         const ZAPIER_WEBHOOK_PROFILE = 'https://hooks.zapier.com/hooks/catch/18655142/uljyyxy/';
 
-        // Check if user is logged in and pre-fill form
-        onAuthStateChanged(auth, (user) => {
+        // Check if user is logged in and pre-fill form from Firestore
+        onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 // Redirect to login if not authenticated
                 window.location.href = 'index.html';
             } else {
-                // Pre-fill email from Firebase
+                // Pre-fill email from Firebase Auth
                 document.getElementById('email').value = user.email || '';
 
-                // Try to pre-fill from sessionStorage
-                const cachedUserData = sessionStorage.getItem('userProfileData');
-                if (cachedUserData) {
-                    try {
-                        const userData = JSON.parse(cachedUserData);
+                try {
+                    // Load user data from Firestore
+                    const userDocRef = doc(db, 'users', user.email);
+                    const userDoc = await getDoc(userDocRef);
 
-                        // Pre-fill form fields
+                    if (userDoc.exists()) {
+                        const userData = userDoc.data();
+
+                        // Pre-fill form fields from Firestore
                         if (userData.fullName) document.getElementById('fullName').value = userData.fullName;
                         if (userData.idNumber) document.getElementById('idNumber').value = userData.idNumber;
                         if (userData.phone) document.getElementById('phone').value = userData.phone;
                         if (userData.address) document.getElementById('address').value = userData.address;
                         if (userData.maritalStatus) document.getElementById('maritalStatus').value = userData.maritalStatus;
 
-                        console.log('Pre-filled form from sessionStorage');
-                    } catch (error) {
-                        console.error('Error parsing cached user data:', error);
+                        console.log('✅ Pre-filled form from Firestore');
+                    } else {
+                        console.log('ℹ️ No user profile found in Firestore yet');
                     }
+                } catch (error) {
+                    console.error('❌ Error loading user data from Firestore:', error);
                 }
             }
         });
@@ -472,32 +478,45 @@
             submitBtn.innerHTML = '<span class="spinner"></span>Saving...';
 
             try {
+                // Get current user
+                const user = auth.currentUser;
+                if (!user) {
+                    throw new Error('User not authenticated');
+                }
+
                 // Collect form data
-                const formData = new FormData();
-                formData.append('fullName', document.getElementById('fullName').value);
-                formData.append('email', document.getElementById('email').value);
-                formData.append('idNumber', document.getElementById('idNumber').value);
-                formData.append('phone', document.getElementById('phone').value);
-                formData.append('address', document.getElementById('address').value);
-                formData.append('maritalStatus', document.getElementById('maritalStatus').value);
-                formData.append('timestamp', new Date().toISOString());
-
-                // Submit to Zapier webhook
-                await fetch(ZAPIER_WEBHOOK_PROFILE, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                // Save to sessionStorage for future pre-filling
                 const userData = {
                     fullName: document.getElementById('fullName').value,
                     email: document.getElementById('email').value,
                     idNumber: document.getElementById('idNumber').value,
                     phone: document.getElementById('phone').value,
                     address: document.getElementById('address').value,
-                    maritalStatus: document.getElementById('maritalStatus').value
+                    maritalStatus: document.getElementById('maritalStatus').value,
+                    lastUpdated: new Date().toISOString()
                 };
-                sessionStorage.setItem('userProfileData', JSON.stringify(userData));
+
+                // **HYBRID APPROACH: Save to BOTH Firestore and Zapier webhook**
+
+                // 1. Save to Firestore (primary database)
+                const userDocRef = doc(db, 'users', user.email);
+                await setDoc(userDocRef, userData, { merge: true });
+                console.log('✅ Saved to Firestore');
+
+                // 2. Submit to Zapier webhook (for Zapier Tables & Pipedrive sync during transition)
+                const formData = new FormData();
+                formData.append('fullName', userData.fullName);
+                formData.append('email', userData.email);
+                formData.append('idNumber', userData.idNumber);
+                formData.append('phone', userData.phone);
+                formData.append('address', userData.address);
+                formData.append('maritalStatus', userData.maritalStatus);
+                formData.append('timestamp', userData.lastUpdated);
+
+                await fetch(ZAPIER_WEBHOOK_PROFILE, {
+                    method: 'POST',
+                    body: formData
+                });
+                console.log('✅ Sent to Zapier webhook');
 
                 // Show success message
                 profileForm.classList.add('hidden');
@@ -509,7 +528,7 @@
                 }, 3000);
 
             } catch (error) {
-                console.error('Error:', error);
+                console.error('❌ Error:', error);
                 alert('There was an error updating your profile. Please try again or contact support.');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Save Changes';
