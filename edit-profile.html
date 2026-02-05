@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Debt Success Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            color: #1a202c;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .brand-tagline {
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .back-btn {
+            padding: 8px 16px;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            color: #718096;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #32b8b1 0%, #2da59f 100%);
+            border-radius: 16px;
+            padding: 40px;
+            color: white;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(50, 184, 177, 0.3);
+        }
+
+        .page-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #e53e3e;
+            margin-left: 4px;
+        }
+
+        .view-only-note {
+            font-size: 12px;
+            color: #718096;
+            font-weight: 400;
+            margin-left: 8px;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #2d3748;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .form-input:disabled {
+            background: #f7fafc;
+            color: #a0aec0;
+            cursor: not-allowed;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #32b8b1;
+            box-shadow: 0 0 0 3px rgba(50, 184, 177, 0.1);
+        }
+
+        .info-box {
+            background: #e6f7f6;
+            border-left: 4px solid #32b8b1;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            color: #2d3748;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #32b8b1 0%, #2da59f 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(50, 184, 177, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(50, 184, 177, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .success-message h3 {
+            color: #065f46;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .success-message p {
+            color: #047857;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #32b8b1;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 16px;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            .page-header {
+                padding: 24px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <img src="debt-success-logo.png" alt="Debt Success" class="logo">
+            <div class="brand">
+                <div class="brand-name">Debt Success</div>
+                <div class="brand-tagline">Client Portal</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="dashboard.html" class="back-btn">← Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-icon">👤</div>
+            <h1 class="page-title">Edit Profile</h1>
+            <p class="page-subtitle">
+                Update your personal information to ensure we can reach you and provide the best support possible.
+            </p>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <h2 class="form-title">Personal Information</h2>
+            <p class="form-subtitle">Keep your contact details up to date</p>
+
+            <form id="profileForm">
+                <!-- Field 1: Full Name -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Full Name<span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-input" id="fullName" name="fullName" required>
+                </div>
+
+                <!-- Field 2: Email (view only) -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Email Address
+                        <span class="view-only-note">(Cannot be changed)</span>
+                    </label>
+                    <input type="email" class="form-input" id="email" name="email" disabled>
+                </div>
+
+                <!-- Field 3: ID Number (view only) -->
+                <div class="form-group">
+                    <label class="form-label">
+                        ID Number
+                        <span class="view-only-note">(Cannot be changed)</span>
+                    </label>
+                    <input type="text" class="form-input" id="idNumber" name="idNumber" disabled>
+                </div>
+
+                <!-- Field 4: Phone Number -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Phone Number<span class="required">*</span>
+                    </label>
+                    <input type="tel" class="form-input" id="phone" name="phone" required>
+                </div>
+
+                <!-- Field 5: Physical Address -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Physical Address
+                    </label>
+                    <input type="text" class="form-input" id="address" name="address" placeholder="Street address, City, Province, Postal Code">
+                </div>
+
+                <!-- Field 6: Marital Status -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Marital Status
+                    </label>
+                    <select class="form-select" id="maritalStatus" name="maritalStatus">
+                        <option value="">Select...</option>
+                        <option value="Single">Single</option>
+                        <option value="Married in Community of Property">Married in Community of Property</option>
+                        <option value="Out of community of property, with accrual">Out of community of property, with accrual</option>
+                        <option value="Out of community of property, without accrual">Out of community of property, without accrual</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Info Box -->
+                <div class="info-box">
+                    <p><strong>Privacy Notice:</strong> Your information is securely stored and will only be used to provide you with support and communicate important updates about your Financial Wellness Programme.</p>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Save Changes
+                </button>
+            </form>
+
+            <!-- Success Message (initially hidden) -->
+            <div id="successMessage" class="success-message hidden">
+                <h3>✅ Profile Updated Successfully!</h3>
+                <p>Your personal information has been updated. Redirecting you back to the dashboard...</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAvY2XO7WQClOkmQN20fc6ABOMd1l5_C9Q",
+            authDomain: "debtsuccessportal.firebaseapp.com",
+            projectId: "debtsuccessportal",
+            storageBucket: "debtsuccessportal.firebasestorage.app",
+            messagingSenderId: "663430205997",
+            appId: "1:663430205997:web:975291f3f432aa5ec11ea4"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Zapier webhook URL for profile updates
+        const ZAPIER_WEBHOOK_PROFILE = 'https://hooks.zapier.com/hooks/catch/18655142/ul7eoga/';
+
+        // Check if user is logged in and pre-fill form
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'index.html';
+            } else {
+                // Pre-fill email from Firebase
+                document.getElementById('email').value = user.email || '';
+
+                // TODO: Fetch additional user data from Zapier Tables to pre-fill other fields
+                // For now, we'll just have email pre-filled
+                // In a future enhancement, we can add a "Get User Data" webhook call here
+            }
+        });
+
+        // Handle form submission
+        const profileForm = document.getElementById('profileForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        profileForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span>Saving...';
+
+            try {
+                // Collect form data
+                const formData = new FormData();
+                formData.append('fullName', document.getElementById('fullName').value);
+                formData.append('email', document.getElementById('email').value);
+                formData.append('idNumber', document.getElementById('idNumber').value);
+                formData.append('phone', document.getElementById('phone').value);
+                formData.append('address', document.getElementById('address').value);
+                formData.append('maritalStatus', document.getElementById('maritalStatus').value);
+                formData.append('timestamp', new Date().toISOString());
+
+                // Submit to Zapier webhook
+                await fetch(ZAPIER_WEBHOOK_PROFILE, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                // Show success message
+                profileForm.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+
+                // Redirect to dashboard after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 3000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error updating your profile. Please try again or contact support.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Save Changes';
+            }
+        });
+    </script>
+</body>
+</html>
