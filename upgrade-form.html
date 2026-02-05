@@ -589,16 +589,33 @@
 
                 <div class="form-group">
                     <label class="form-label">
-                        Do you understand and agree to the R450/month subscription fee?<span class="required">*</span>
+                        I understand that this programme costs R450 per month.<span class="required">*</span>
                     </label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="paymentYes" name="paymentConsent" value="Yes, I understand and agree" required>
-                            <label for="paymentYes">Yes, I understand and agree to the R450/month fee</label>
+                            <input type="radio" id="paymentYes" name="paymentConsent" value="Yes" required>
+                            <label for="paymentYes">Yes</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="paymentNo" name="paymentConsent" value="No, I need more information">
-                            <label for="paymentNo">No, I need more information about pricing</label>
+                            <input type="radio" id="paymentNo" name="paymentConsent" value="No">
+                            <label for="paymentNo">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field 11.5: Billing Consent -->
+                <div class="form-group">
+                    <label class="form-label">
+                        I consent to being billed R450 per month for Financial Wellness support until I choose to cancel.<span class="required">*</span>
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="billingConsentYes" name="billingConsent" value="Yes" required>
+                            <label for="billingConsentYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="billingConsentNo" name="billingConsent" value="No">
+                            <label for="billingConsentNo">No</label>
                         </div>
                     </div>
                 </div>
@@ -721,10 +738,17 @@
         upgradeForm.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // Validate payment consent
+            // Validate payment consent and billing consent
             const paymentConsent = document.querySelector('input[name="paymentConsent"]:checked');
-            if (paymentConsent && paymentConsent.value !== 'Yes, I understand and agree') {
-                alert('Please confirm that you understand and agree to the R450/month subscription fee before proceeding.');
+            const billingConsent = document.querySelector('input[name="billingConsent"]:checked');
+
+            if (paymentConsent && paymentConsent.value !== 'Yes') {
+                alert('Please confirm that you understand this programme costs R450/month before proceeding.');
+                return;
+            }
+
+            if (billingConsent && billingConsent.value !== 'Yes') {
+                alert('Please consent to being billed R450/month before proceeding.');
                 return;
             }
 
@@ -746,6 +770,7 @@
                 formData.append('weeklyCommitment', document.querySelector('input[name="weeklyCommitment"]:checked').value);
                 formData.append('preferredContact', document.querySelector('input[name="preferredContact"]:checked').value);
                 formData.append('paymentConsent', paymentConsent.value);
+                formData.append('billingConsent', billingConsent.value);
                 formData.append('billingMethod', document.querySelector('input[name="billingMethod"]:checked').value);
                 formData.append('contactBeforeStart', document.querySelector('input[name="contactBeforeStart"]:checked').value);
                 formData.append('additionalInfo', document.getElementById('additionalInfo').value);
