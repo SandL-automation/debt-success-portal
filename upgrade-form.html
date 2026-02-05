@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade Programme - Debt Success Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            color: #1a202c;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .brand-tagline {
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .back-btn {
+            padding: 8px 16px;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            color: #718096;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #32b8b1 0%, #2da59f 100%);
+            border-radius: 16px;
+            padding: 40px;
+            color: white;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(50, 184, 177, 0.3);
+        }
+
+        .hero-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .price-tag {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .price-amount {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .price-period {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Features */
+        .features-section {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .features-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 24px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #e53e3e;
+            margin-left: 4px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #2d3748;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #32b8b1;
+            box-shadow: 0 0 0 3px rgba(50, 184, 177, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .radio-option:hover {
+            background: #f7fafc;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            cursor: pointer;
+            font-size: 14px;
+            color: #2d3748;
+            flex: 1;
+        }
+
+        .highlight-box {
+            background: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .highlight-box p {
+            font-size: 14px;
+            color: #c53030;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .info-box {
+            background: #e6f7f6;
+            border-left: 4px solid #32b8b1;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            color: #2d3748;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #32b8b1 0%, #2da59f 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(50, 184, 177, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(50, 184, 177, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .success-message h3 {
+            color: #065f46;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .success-message p {
+            color: #047857;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #32b8b1;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 16px;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            .hero-section {
+                padding: 24px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <img src="debt-success-logo.png" alt="Debt Success" class="logo">
+            <div class="brand">
+                <div class="brand-name">Debt Success</div>
+                <div class="brand-tagline">Client Portal</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="dashboard.html" class="back-btn">← Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-icon">⭐</div>
+            <h1 class="hero-title">Upgrade to Premium Support</h1>
+            <p class="hero-subtitle">
+                Get structured weekly guidance, personalized accountability, and direct access to our financial wellness experts to accelerate your debt freedom journey.
+            </p>
+            <div class="price-tag">
+                <span class="price-amount">R450</span>
+                <span class="price-period">/month</span>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section">
+            <h2 class="features-title">What's Included</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📞</div>
+                    <div class="feature-text">
+                        <strong>Weekly Check-ins:</strong> Regular accountability calls to keep you on track
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-text">
+                        <strong>Direct Support:</strong> WhatsApp, email, or phone access to your coach
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">
+                        <strong>Personalized Plans:</strong> Custom strategies based on your unique situation
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-text">
+                        <strong>Progress Tracking:</strong> Detailed monitoring and adjustments as needed
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <h2 class="form-title">Upgrade Application</h2>
+            <p class="form-subtitle">Complete this form to begin your premium support journey</p>
+
+            <form id="upgradeForm">
+                <!-- Field 1: Full Name -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Full Name<span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-input" id="fullName" name="fullName" required>
+                </div>
+
+                <!-- Field 2: ID Number -->
+                <div class="form-group">
+                    <label class="form-label">
+                        ID Number<span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-input" id="idNumber" name="idNumber" required>
+                </div>
+
+                <!-- Field 3: Email -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Email Address<span class="required">*</span>
+                    </label>
+                    <input type="email" class="form-input" id="email" name="email" required>
+                </div>
+
+                <!-- Field 4: Phone -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Phone Number<span class="required">*</span>
+                    </label>
+                    <input type="tel" class="form-input" id="phone" name="phone" required>
+                </div>
+
+                <!-- Field 5: Why are you signing up? -->
+                <div class="form-group">
+                    <label class="form-label">
+                        What made you decide to sign up for additional Financial Wellness support?<span class="required">*</span>
+                    </label>
+                    <select class="form-select" id="reason" name="reason" required>
+                        <option value="">Select a reason...</option>
+                        <option value="I want more structure and accountability">I want more structure and accountability</option>
+                        <option value="I feel overwhelmed and need extra guidance">I feel overwhelmed and need extra guidance</option>
+                        <option value="I want help building better financial habits">I want help building better financial habits</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Field 6: Other reason (conditional) -->
+                <div class="form-group hidden" id="otherReasonGroup">
+                    <label class="form-label">
+                        Please specify your reason<span class="required">*</span>
+                    </label>
+                    <textarea class="form-textarea" id="otherReason" name="otherReason"></textarea>
+                </div>
+
+                <!-- Field 7: What specific support are you hoping for? -->
+                <div class="form-group">
+                    <label class="form-label">
+                        What would you most like support with right now?<span class="required">*</span>
+                    </label>
+                    <textarea class="form-textarea" id="supportNeeded" name="supportNeeded" required></textarea>
+                </div>
+
+                <!-- Field 8: What challenges are you facing? -->
+                <div class="form-group">
+                    <label class="form-label">
+                        What challenges are you currently facing in your financial wellness journey?<span class="required">*</span>
+                    </label>
+                    <textarea class="form-textarea" id="challenges" name="challenges" required></textarea>
+                </div>
+
+                <!-- Field 9: Weekly engagement commitment -->
+                <div class="form-group">
+                    <label class="form-label">
+                        This programme provides weekly guidance and accountability. Are you comfortable committing to this level of engagement?<span class="required">*</span>
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="commitYes" name="weeklyCommitment" value="Yes" required>
+                            <label for="commitYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="commitMaybe" name="weeklyCommitment" value="I'm not sure but would like to">
+                            <label for="commitMaybe">I'm not sure but would like to</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field 10: Preferred contact method -->
+                <div class="form-group">
+                    <label class="form-label">
+                        How would you prefer to receive your weekly support?<span class="required">*</span>
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="contactEmail" name="preferredContact" value="Email" required>
+                            <label for="contactEmail">Email</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="contactWhatsApp" name="preferredContact" value="WhatsApp">
+                            <label for="contactWhatsApp">WhatsApp</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="contactBoth" name="preferredContact" value="Combination of both">
+                            <label for="contactBoth">Combination of both</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field 11: Payment Understanding -->
+                <div class="highlight-box">
+                    <p><strong>Important:</strong> The paid version of the FWP costs R450 per month. This subscription provides you with structured weekly guidance, personalized support, and direct access to our financial wellness experts.</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Do you understand and agree to the R450/month subscription fee?<span class="required">*</span>
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="paymentYes" name="paymentConsent" value="Yes, I understand and agree" required>
+                            <label for="paymentYes">Yes, I understand and agree to the R450/month fee</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="paymentNo" name="paymentConsent" value="No, I need more information">
+                            <label for="paymentNo">No, I need more information about pricing</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field 12: Billing method -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Preferred billing method<span class="required">*</span>
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="billingDebit" name="billingMethod" value="Debit order" required>
+                            <label for="billingDebit">Debit order (automatic monthly payment)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="billingEFT" name="billingMethod" value="EFT">
+                            <label for="billingEFT">Manual EFT/Bank transfer each month</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field 12.5: Contact before start -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Would you like someone from Debt Success to contact you to explain the programme before it starts?<span class="required">*</span>
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="contactBeforeYes" name="contactBeforeStart" value="Yes" required>
+                            <label for="contactBeforeYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="contactBeforeNo" name="contactBeforeStart" value="No, I'm happy to proceed">
+                            <label for="contactBeforeNo">No, I'm happy to proceed</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field 13: Anything else? -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Anything else you'd like us to know before we begin supporting you weekly?
+                    </label>
+                    <textarea class="form-textarea" id="additionalInfo" name="additionalInfo" placeholder="Optional"></textarea>
+                </div>
+
+                <!-- Field 14: How did you hear about us? -->
+                <div class="form-group">
+                    <label class="form-label">
+                        How did you hear about the paid version of the FWP?
+                    </label>
+                    <select class="form-select" id="referralSource" name="referralSource">
+                        <option value="">Select an option...</option>
+                        <option value="Email from Debt Success">Email from Debt Success</option>
+                        <option value="Dashboard notification">Dashboard notification in the portal</option>
+                        <option value="Phone call from team">Phone call from the Debt Success team</option>
+                        <option value="WhatsApp message">WhatsApp message</option>
+                        <option value="Friend or family">Friend or family member</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Info Box -->
+                <div class="info-box">
+                    <p><strong>Next Steps:</strong> After submitting this form, our team will contact you within 24 hours to discuss payment options and schedule your first support session!</p>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Submit Application
+                </button>
+            </form>
+
+            <!-- Success Message (initially hidden) -->
+            <div id="successMessage" class="success-message hidden">
+                <h3>✅ Application Submitted Successfully!</h3>
+                <p>Thank you for your interest in premium support! Our team will contact you within 24 hours to discuss payment options and schedule your first coaching session.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAvY2XO7WQClOkmQN20fc6ABOMd1l5_C9Q",
+            authDomain: "debtsuccessportal.firebaseapp.com",
+            projectId: "debtsuccessportal",
+            storageBucket: "debtsuccessportal.firebasestorage.app",
+            messagingSenderId: "663430205997",
+            appId: "1:663430205997:web:975291f3f432aa5ec11ea4"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Check if user is logged in
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'index.html';
+            } else {
+                // Pre-fill form with user data
+                document.getElementById('email').value = user.email || '';
+            }
+        });
+
+        // Zapier webhook URL for upgrade form submission
+        const ZAPIER_WEBHOOK_UPGRADE = 'https://hooks.zapier.com/hooks/catch/18655142/ulxxquq/';
+
+        // Show/hide "Other reason" field based on dropdown selection
+        const reasonSelect = document.getElementById('reason');
+        const otherReasonGroup = document.getElementById('otherReasonGroup');
+        const otherReasonTextarea = document.getElementById('otherReason');
+
+        reasonSelect.addEventListener('change', function() {
+            if (this.value === 'Other') {
+                otherReasonGroup.classList.remove('hidden');
+                otherReasonTextarea.required = true;
+            } else {
+                otherReasonGroup.classList.add('hidden');
+                otherReasonTextarea.required = false;
+                otherReasonTextarea.value = '';
+            }
+        });
+
+        // Handle form submission
+        const upgradeForm = document.getElementById('upgradeForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        upgradeForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Validate payment consent
+            const paymentConsent = document.querySelector('input[name="paymentConsent"]:checked');
+            if (paymentConsent && paymentConsent.value !== 'Yes, I understand and agree') {
+                alert('Please confirm that you understand and agree to the R450/month subscription fee before proceeding.');
+                return;
+            }
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span>Submitting...';
+
+            try {
+                // Collect form data
+                const formData = new FormData();
+                formData.append('fullName', document.getElementById('fullName').value);
+                formData.append('idNumber', document.getElementById('idNumber').value);
+                formData.append('email', document.getElementById('email').value);
+                formData.append('phone', document.getElementById('phone').value);
+                formData.append('reason', document.getElementById('reason').value);
+                formData.append('otherReason', document.getElementById('otherReason').value);
+                formData.append('supportNeeded', document.getElementById('supportNeeded').value);
+                formData.append('challenges', document.getElementById('challenges').value);
+                formData.append('weeklyCommitment', document.querySelector('input[name="weeklyCommitment"]:checked').value);
+                formData.append('preferredContact', document.querySelector('input[name="preferredContact"]:checked').value);
+                formData.append('paymentConsent', paymentConsent.value);
+                formData.append('billingMethod', document.querySelector('input[name="billingMethod"]:checked').value);
+                formData.append('contactBeforeStart', document.querySelector('input[name="contactBeforeStart"]:checked').value);
+                formData.append('additionalInfo', document.getElementById('additionalInfo').value);
+                formData.append('referralSource', document.getElementById('referralSource').value);
+                formData.append('timestamp', new Date().toISOString());
+
+                // Submit to Zapier webhook
+                await fetch(ZAPIER_WEBHOOK_UPGRADE, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                // Show success message
+                upgradeForm.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+
+                // Redirect to dashboard after 5 seconds
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 5000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting your application. Please try again or contact support.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Application';
+            }
+        });
+    </script>
+</body>
+</html>
