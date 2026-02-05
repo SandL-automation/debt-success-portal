@@ -478,5 +478,53 @@
             </a>
         </div>
     </div>
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAvY2XO7WQClOkmQN20fc6ABOMd1l5_C9Q",
+            authDomain: "debtsuccessportal.firebaseapp.com",
+            projectId: "debtsuccessportal",
+            storageBucket: "debtsuccessportal.firebasestorage.app",
+            messagingSenderId: "663430205997",
+            appId: "1:663430205997:web:975291f3f432aa5ec11ea4"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Check if user is logged in
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Logout functionality
+        const logoutBtn = document.querySelector('.logout-btn:last-child');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', async () => {
+                try {
+                    // Clear sessionStorage
+                    sessionStorage.clear();
+
+                    // Sign out from Firebase
+                    await signOut(auth);
+
+                    // Redirect to login page
+                    window.location.href = 'index.html';
+                } catch (error) {
+                    console.error('Error signing out:', error);
+                    alert('Error signing out. Please try again.');
+                }
+            });
+        }
+    </script>
 </body>
 </html>

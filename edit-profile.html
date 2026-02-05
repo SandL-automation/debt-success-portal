@@ -427,7 +427,7 @@
         const auth = getAuth(app);
 
         // Zapier webhook URL for profile updates
-        const ZAPIER_WEBHOOK_PROFILE = 'https://hooks.zapier.com/hooks/catch/18655142/ul7eoga/';
+        const ZAPIER_WEBHOOK_PROFILE = 'https://hooks.zapier.com/hooks/catch/18655142/uljyyxy/';
 
         // Check if user is logged in and pre-fill form
         onAuthStateChanged(auth, (user) => {
@@ -438,9 +438,24 @@
                 // Pre-fill email from Firebase
                 document.getElementById('email').value = user.email || '';
 
-                // TODO: Fetch additional user data from Zapier Tables to pre-fill other fields
-                // For now, we'll just have email pre-filled
-                // In a future enhancement, we can add a "Get User Data" webhook call here
+                // Try to pre-fill from sessionStorage
+                const cachedUserData = sessionStorage.getItem('userProfileData');
+                if (cachedUserData) {
+                    try {
+                        const userData = JSON.parse(cachedUserData);
+
+                        // Pre-fill form fields
+                        if (userData.fullName) document.getElementById('fullName').value = userData.fullName;
+                        if (userData.idNumber) document.getElementById('idNumber').value = userData.idNumber;
+                        if (userData.phone) document.getElementById('phone').value = userData.phone;
+                        if (userData.address) document.getElementById('address').value = userData.address;
+                        if (userData.maritalStatus) document.getElementById('maritalStatus').value = userData.maritalStatus;
+
+                        console.log('Pre-filled form from sessionStorage');
+                    } catch (error) {
+                        console.error('Error parsing cached user data:', error);
+                    }
+                }
             }
         });
 
@@ -472,6 +487,17 @@
                     method: 'POST',
                     body: formData
                 });
+
+                // Save to sessionStorage for future pre-filling
+                const userData = {
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    idNumber: document.getElementById('idNumber').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    maritalStatus: document.getElementById('maritalStatus').value
+                };
+                sessionStorage.setItem('userProfileData', JSON.stringify(userData));
 
                 // Show success message
                 profileForm.classList.add('hidden');
