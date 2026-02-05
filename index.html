@@ -641,14 +641,8 @@
                     // Success! Firebase session created
                     console.log('Firebase authentication successful');
 
-                    // Store client data
-                    currentClient = {
-                        idNumber: idNumber,
-                        email: email,
-                        name: userCredential.user.displayName || 'User' // We'll set this up later
-                    };
-
-                    showFeedbackForm();
+                    // Redirect to dashboard
+                    window.location.href = 'dashboard.html';
 
                 } catch (firebaseError) {
                     // User doesn't exist in Firebase yet, but they're in Zapier Tables
