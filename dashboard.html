@@ -275,6 +275,9 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             transition: all 0.3s;
             cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
         }
 
         .action-card:hover {
@@ -316,9 +319,10 @@
             font-size: 14px;
             font-weight: 600;
             text-decoration: none;
+            pointer-events: none;
         }
 
-        .action-button:hover {
+        .action-card:hover .action-button {
             gap: 12px;
         }
 
@@ -444,33 +448,33 @@
         <!-- Action Cards -->
         <h2 class="section-title">Quick Actions</h2>
         <div class="actions-grid">
-            <div class="action-card">
+            <a href="#" class="action-card">
                 <div class="action-icon icon-teal">💬</div>
                 <div class="action-title">Submit Feedback</div>
                 <div class="action-description">Share your thoughts and insights about your current FWP step</div>
-                <a href="#" class="action-button">Go to form →</a>
-            </div>
+                <span class="action-button">Go to form →</span>
+            </a>
 
-            <div class="action-card">
+            <a href="upgrade-form.html" class="action-card">
                 <div class="action-icon icon-purple">⭐</div>
                 <div class="action-title">Upgrade Programme</div>
                 <div class="action-description">Unlock premium features and personalized support</div>
-                <a href="upgrade-form.html" class="action-button">Learn more →</a>
-            </div>
+                <span class="action-button">Learn more →</span>
+            </a>
 
-            <div class="action-card">
+            <a href="#" class="action-card">
                 <div class="action-icon icon-blue">📄</div>
                 <div class="action-title">Upload Documents</div>
                 <div class="action-description">Submit required documents for Stage 5 verification</div>
-                <a href="#" class="action-button">Upload now →</a>
-            </div>
+                <span class="action-button">Upload now →</span>
+            </a>
 
-            <div class="action-card">
+            <a href="#" class="action-card">
                 <div class="action-icon icon-green">📖</div>
                 <div class="action-title">Programme Resources</div>
                 <div class="action-description">Access guides, worksheets, and educational materials</div>
-                <a href="#" class="action-button">View resources →</a>
-            </div>
+                <span class="action-button">View resources →</span>
+            </a>
         </div>
     </div>
 </body>
